@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review Order - HomebrewCon Keg Labels</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="background-glow"></div>
+    <div class="page">
+        <div class="logo-container">
+            <img src="./HBC-Logo.svg" alt="HBC Logo">
+            <img src="https://www.grogtag.com/-1015630644/Handler/CSSOverride/GetImage/6/grogtag-logo.svg"
+                alt="GrogTag Logo">
+        </div>
+        <div class="tag">Review & Delivery</div>
+
+        <h1>
+            Order your <span class="accent">Keg Labels</span> here!
+        </h1>
+
+        <p class="subtitle">
+            Add, Edit and review all the labels you need for Homebrewcon and click "Submit Order".<br>
+            Confirm your keg details and enter your delivery information before submitting your order.
+            If you have further questions see our <a href="./faq.html">FAQs</a> page.
+        </p>
+
+        <!-- <div class="instructions-card">
+
+            <div class="instructions-header">
+
+                <div class="tag">
+                    Instructions
+                </div>
+
+                <h2>
+                    How To Submit Your <span class="accent">Keg Labels</span>
+                </h2>
+
+            </div>
+
+            <ol class="instructions-list">
+
+                <li>
+                    Add your delivery information. Name, Email, Address etc.
+                </li>
+
+                <li>
+                    Click <strong>"Add New Label"</strong>
+                </li>
+
+                <li>
+                    Add your label information into the popup form.
+                </li>
+
+                <li>
+                    Save each label when complete.
+                </li>
+
+                <li>
+                    Repeat Adding and Saving until you have all the labels you need.
+                </li>
+
+                <li>
+                    Review your delivery and label information. Edit anything that needs to change.
+                </li>
+
+                <li>
+                    Click <strong>"Submit Order"</strong>
+                </li>
+
+            </ol>
+
+        </div> -->
+
+        <div class="layout">
+
+            <!-- DELIVERY FORM -->
+            <div class="card">
+
+                <h2 class="section-title">
+                    Delivery Address
+                </h2>
+
+                <form id="deliveryForm">
+
+                    <div class="field">
+                        <label>Full Name</label>
+                        <input type="text" id="fullName" required placeholder="John Brewer">
+                    </div>
+
+                    <div class="field">
+                        <label>Email Address</label>
+                        <input type="email" id="email" required placeholder="john@example.com">
+                    </div>
+
+                    <div class="field">
+                        <label>Street Address</label>
+                        <input type="text" id="address1" required placeholder="123 Brew Street">
+                    </div>
+
+                    <div class="grid">
+
+                        <div class="field">
+                            <label>City</label>
+                            <input type="text" id="city" required placeholder="Sacramento">
+                        </div>
+
+                        <div class="field">
+                            <label>State</label>
+                            <input type="text" id="state" required placeholder="California">
+                        </div>
+
+                    </div>
+
+                    <div class="grid">
+
+                        <div class="field">
+                            <label>ZIP Code</label>
+                            <input type="text" id="zip" required placeholder="95814">
+                        </div>
+
+                        <div class="field">
+                            <label>Country</label>
+                            <input type="text" id="country" required placeholder="United States">
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- REVIEW -->
+            <div class="card">
+
+                <h2 class="section-title">
+                    Label Review
+                </h2>
+
+                <div id="labelsContainer"></div>
+
+                <button class="submit-button" type="button" onclick="openOverlay()">
+                    Add New Label
+                </button>
+
+                <button class="submit-button" type="button" onclick="submitOrder()">
+                    Submit Order
+                </button>
+
+            </div>
+            <!-- <div class="card">
+                <h2 class="section-title">
+                    Instructions
+                </h2>
+                    <ol class="instructions">
+                        <li>Add your delivery information. Name, Email, Address etc.</li>
+                        <li>Click "Add New Label"</li>
+                        <li>Add your label information into the popup form.</li>
+                        <li>Save each label when complete.</li>
+                        <li>Repeat Adding and Saving until you have all the labels you need.</li>
+                        <li>Review your delivery and label information. Edit anything that needs to change.</li>
+                        <li>Click "Submit Order"</li>
+                    </ol>
+            </div> -->
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay">
+
+        <div class="overlay-card">
+
+            <div class="overlay-header">
+
+                <div>
+                    <div class="tag">Edit Keg Label</div>
+
+                    <h2 class="section-title">
+                        Label Information
+                    </h2>
+                </div>
+
+                <button class="close-button" onclick="closeOverlay()">
+                    ✕
+                </button>
+
+            </div>
+
+            <form id="labelForm">
+
+                <input type="hidden" id="labelIndex" value="-1">
+                <div class="field">
+                    <label for="event">Event</label>
+                    <select id="event">
+                        <option>Club Night</option>
+                        <option>Homebrew Hospitality</option>
+                        <option>Homebrew Expo</option>
+                        <option>Brewer Talks</option>
+                    </select>
+                </div>
+
+                <div class="grid">
+
+                    <div class="field">
+                        <label>Club Name</label>
+                        <input type="text" id="clubName" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Location</label>
+                        <input type="text" id="location">
+                    </div>
+
+                </div>
+
+                <div class="grid">
+
+                    <div class="field">
+                        <label>Beer Name</label>
+                        <input type="text" id="beerName">
+                    </div>
+
+                    <div class="field">
+                        <label>Beer Style</label>
+                        <input type="text" id="beerStyle">
+                    </div>
+
+
+                </div>
+
+                <div class="grid">
+
+                    <div class="field">
+                        <label>Day</label>
+                        <select id="day">
+                            <option>Monday</option>
+                            <option>Tuesday</option>
+                            <option>Wednesday</option>
+                            <option>Thursday</option>
+                            <option>Friday</option>
+                            <option>Saturday</option>
+                            <option>Sunday</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Time</label>
+                        <input type="time" id="time">
+                    </div>
+
+                    <div class="field">
+                        <label>Quantity of label</label>
+                        <input type="number" id="labelQuantity" min="1" value="1">
+                    </div>
+
+                </div>
+
+                <button class="save-button" type="submit">
+                    Save Label
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- REPLACE THE EXISTING SCRIPT WITH THIS -->
+
+    <script>
+
+        let labels = JSON.parse(localStorage.getItem('kegLabels')) || [];
+
+        const overlay = document.getElementById('overlay');
+        const labelsContainer = document.getElementById('labelsContainer');
+        const labelForm = document.getElementById('labelForm');
+
+        function openOverlay(index = -1) {
+
+            document.getElementById('labelIndex').value = index;
+
+            if (index >= 0) {
+
+                const label = labels[index];
+
+                document.getElementById('event').value = label.event;
+                document.getElementById('clubName').value = label.clubName;
+                document.getElementById('location').value = label.location;
+                document.getElementById('beerName').value = label.beerName;
+                document.getElementById('beerStyle').value = label.beerStyle;
+                document.getElementById('day').value = label.day;
+                document.getElementById('time').value = label.time;
+
+            } else {
+
+                labelForm.reset();
+
+            }
+
+            overlay.classList.add('active');
+        }
+
+        function closeOverlay() {
+            overlay.classList.remove('active');
+        }
+
+        function saveLabels() {
+            localStorage.setItem('kegLabels', JSON.stringify(labels));
+        }
+
+        function renderLabels() {
+
+            labelsContainer.innerHTML = '';
+
+            if (labels.length === 0) {
+
+                labelsContainer.innerHTML = `
+                <div class="label-card">
+                    No labels added yet.
+                </div>
+            `;
+
+                return;
+            }
+
+            labels.forEach((label, index) => {
+
+                const labelCard = document.createElement('div');
+                labelCard.className = 'label-card';
+
+                labelCard.innerHTML = `
+                <div class="label-top">
+
+                    <div class="beer-name">
+                        ${label.beerName} x ${label.labelQuantity}
+                    </div>
+
+                    <div class="event-tag">
+                        ${label.event}
+                    </div>
+
+                </div>
+
+                <div class="details">
+
+                    <div class="detail">
+                        <strong>Club Name</strong>
+                        ${label.clubName}
+                    </div>
+
+                    <div class="detail">
+                        <strong>Location</strong>
+                        ${label.location}
+                    </div>
+
+                    <div class="detail">
+                        <strong>Beer Style</strong>
+                        ${label.beerStyle}
+                    </div>
+
+                    <div class="detail">
+                        <strong>Schedule</strong>
+                        ${label.day} • ${formatTime(label.time)}
+                    </div>
+
+                </div>
+
+                <div class="button-row">
+
+                    <button 
+                        class="edit-button" 
+                        type="button"
+                        onclick="openOverlay(${index})"
+                    >
+                        Edit Info
+                    </button>
+
+                    <button 
+                        class="edit-button" 
+                        type="button"
+                        onclick="deleteLabel(${index})"
+                    >
+                        Delete
+                    </button>
+
+                </div>
+            `;
+
+                labelsContainer.appendChild(labelCard);
+
+            });
+
+        }
+
+        function deleteLabel(index) {
+
+            if (!confirm('Delete this label?')) {
+                return;
+            }
+
+            labels.splice(index, 1);
+
+            saveLabels();
+            renderLabels();
+        }
+
+        function formatTime(time) {
+
+            if (!time) {
+                return '';
+            }
+
+            const [hours, minutes] = time.split(':');
+
+            let hour = parseInt(hours);
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+
+            hour = hour % 12;
+            hour = hour ? hour : 12;
+
+            return `${hour}:${minutes} ${ampm}`;
+        }
+
+        labelForm.addEventListener('submit', function (event) {
+
+            event.preventDefault();
+
+            if (!labelForm.checkValidity()) {
+
+                labelForm.reportValidity();
+
+                return;
+            }
+
+            const labelData = {
+
+                event: document.getElementById('event').value,
+                clubName: document.getElementById('clubName').value,
+                location: document.getElementById('location').value,
+                beerName: document.getElementById('beerName').value,
+                beerStyle: document.getElementById('beerStyle').value,
+                labelQuantity: document.getElementById('labelQuantity').value,
+                day: document.getElementById('day').value,
+                time: document.getElementById('time').value
+
+            };
+
+            const index = parseInt(document.getElementById('labelIndex').value);
+
+            if (index >= 0) {
+
+                labels[index] = labelData;
+
+            } else {
+
+                labels.push(labelData);
+
+            }
+
+            saveLabels();
+
+            renderLabels();
+
+            closeOverlay();
+
+        });
+
+
+        async function submitOrder() {
+
+            const deliveryForm = document.getElementById('deliveryForm');
+
+            if (!deliveryForm.checkValidity()) {
+
+                deliveryForm.reportValidity();
+
+                return;
+            }
+
+            if (labels.length === 0) {
+
+                alert('Please add at least one keg label.');
+
+                return;
+            }
+
+            const orderData = {
+
+                delivery: {
+
+                    fullName: document.getElementById('fullName').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    address1: document.getElementById('address1').value.trim(),
+                    city: document.getElementById('city').value.trim(),
+                    state: document.getElementById('state').value.trim(),
+                    zip: document.getElementById('zip').value.trim(),
+                    country: document.getElementById('country').value.trim()
+
+                },
+
+                labels: labels,
+
+                createdAt: serverTimestamp()
+
+            };
+
+            console.log('ORDER SUBMISSION');
+            console.log(orderData);
+
+            try {
+
+                const docRef = await addDoc(
+                    collection(db, 'orderSubmissions'),
+                    orderData
+                );
+
+                console.log('Firestore document written:', docRef.id);
+
+                alert('Order submitted successfully.');
+
+                localStorage.removeItem('kegLabels');
+
+                labels = [];
+
+                renderLabels();
+
+                deliveryForm.reset();
+
+            } catch (error) {
+
+                console.error('Error submitting order:', error);
+
+                alert('Error submitting order.');
+
+            }
+
+        }
+
+        renderLabels();
+
+
+
+    </script>
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+        // REPLACE WITH YOUR FIREBASE CONFIG
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDXSr_khSoQ34RMCjsX0uIkTZlVUAhomd0",
+            authDomain: "homebrewcon-keg.firebaseapp.com",
+            projectId: "homebrewcon-keg",
+            storageBucket: "homebrewcon-keg.firebasestorage.app",
+            messagingSenderId: "135908366189",
+            appId: "1:135908366189:web:1805daefc872a2db60ec64",
+            measurementId: "G-2FH3SNRNG0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+        const db = getFirestore(app);
+
+        window.db = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.serverTimestamp = serverTimestamp;
+
+    </script>
+</body>
+
+</html>

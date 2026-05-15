@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ - HomebrewCon Keg Label Ordering</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0f0f10;
+            color: #f5f5f5;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            padding: 3rem 1.5rem;
+        }
+
+        .background-glow {
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(180, 0, 0, 0.35) 0%, rgba(180, 0, 0, 0) 70%);
+            filter: blur(40px);
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            margin-bottom: 3rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(193, 18, 31, 0.15);
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 107, 107, 0.25);
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            line-height: 1.05;
+        }
+
+        .accent {
+            color: #e63946;
+        }
+
+        .subtitle {
+            color: #a7a7aa;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        .faq-container {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: rgba(20, 20, 22, 0.94);
+            border: 1px solid #2d2d2f;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.2s ease;
+        }
+
+        .faq-item.active {
+            border-color: rgba(230, 57, 70, 0.45);
+            box-shadow: 0 0 24px rgba(193, 18, 31, 0.12);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 1.4rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .faq-icon {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            transition: transform 0.2s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: #b5b5b8;
+            line-height: 1.7;
+        }
+
+        .contact-card {
+            margin-top: 3rem;
+            background: rgba(20, 20, 22, 0.94);
+            border: 1px solid #2d2d2f;
+            border-top: 4px solid #c1121f;
+            border-radius: 18px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .contact-card h2 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .contact-card p {
+            color: #a7a7aa;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: #c1121f;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.2s ease;
+        }
+
+        .contact-button:hover {
+            background: #e63946;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.35);
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 2rem 1rem;
+            }
+
+            .faq-question {
+                padding: 1.2rem;
+                font-size: 0.95rem;
+            }
+
+            .faq-answer-content {
+                padding: 0 1.2rem 1.2rem;
+            }
+
+            .contact-card {
+                padding: 1.5rem;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background-glow"></div>
+
+    <div class="page">
+
+        <div class="hero">
+
+            <div class="tag">
+                HomebrewCon Help
+            </div>
+
+            <h1>
+                Frequently Asked <span class="accent">Questions</span>
+            </h1>
+
+            <p class="subtitle">
+                Information about keg label ordering, submission deadlines,
+                delivery, artwork preparation, and event logistics for HomebrewCon.
+            </p>
+
+        </div>
+
+        <div class="faq-container">
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        When do keg label orders close?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Orders typically close 1-2 weeks before the event to allow time for production and fulfillment.
+                        Exact deadlines will be announced before HomebrewCon.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        Can I edit my submission after placing an order?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Yes. If production has not started, you can contact the organizers to request changes to beer
+                        information, schedule details, or delivery information.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        Can I submit multiple keg labels in one order?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Yes. The ordering system supports multiple labels per order. You can add, edit, and review all
+                        submitted labels before checkout.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        What events are supported?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Labels can currently be submitted for Club Night, Homebrew Hospitality, Homebrew Expo, and
+                        Brewer Talks events.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        Will labels be shipped or picked up onsite?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Depending on the event schedule and logistics, labels may either be shipped ahead of time or
+                        made available for onsite pickup during HomebrewCon.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        What information is required for each label?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Each label requires an event type, club name, serving location, beer name, beer style, serving
+                        day, and serving time.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        What is your privacy policy?
+                    </span>
+
+                    <span class="faq-icon">+</span>
+
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        We do not create any cookies or save local storage for tracking purposes.
+                        The only information that we save is the information that is submitted to print and ship your labels.
+                        GrogTag does not share this shipping and label information.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="contact-card">
+
+            <h2>
+                Still Need Help?
+            </h2>
+
+            <p>
+                If you have questions about ordering, fulfillment,
+                deadlines, or event logistics, contact the HomebrewCon
+                keg label team directly.
+            </p>
+
+            <a href="mailto:support@grogtag.com" class="contact-button">
+                Contact Support
+            </a>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+
+            const button = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+
+            button.addEventListener('click', () => {
+
+                const isActive = item.classList.contains('active');
+
+                faqItems.forEach(faq => {
+
+                    faq.classList.remove('active');
+
+                    faq.querySelector('.faq-answer').style.maxHeight = null;
+
+                });
+
+                if (!isActive) {
+
+                    item.classList.add('active');
+
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
